@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         var studentsCours1 = arrayListOf<Student>(
             Student("Achour", "Ines", "F"),
             Student("Unknown", "Unknown", "M"),
-            Student("Test", "Test2", "M")
+            Student("Ahmed", "Oussama", "M"),
+            Student("Ahmed", "Iheb", "M"),
         )
 
         var studentsCours2 = arrayListOf<Student>(
@@ -38,32 +39,44 @@ class MainActivity : AppCompatActivity() {
             Student("Foulena", "Ben Foulen", "F"),
         )
 
-        var students = studentsCours1
+        var students = arrayListOf<Student>()
+        var studentsAdapter = StudentsAdapter(students)
+
 
         spinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, matieres)
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                /*var toast = Toast.makeText(applicationContext, matieres[position], Toast.LENGTH_SHORT)
-                toast.show()*/
-                if(position ==0){
-                    recycler.adapter = StudentsAdapter(studentsCours1)
-                }
-                else{
-                    recycler.adapter = StudentsAdapter(studentsCours2)
-                }
-            }
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-            }
-        }
-
-        var studentsAdapter = StudentsAdapter(students)
 
         recycler.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = studentsAdapter
         }
 
+
+        //Spinner
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                /*var toast = Toast.makeText(applicationContext, matieres[position], Toast.LENGTH_SHORT)
+                toast.show()*/
+                if(position == 0){
+                    students.clear()
+                    students.addAll(studentsCours1)
+                    recycler.adapter?.notifyDataSetChanged()
+                    studentsAdapter.filter.filter("")
+                    filterEditText.text.clear()
+                }
+                else{
+                    students.clear()
+                    students.addAll(studentsCours2)
+                    recycler.adapter?.notifyDataSetChanged()
+                    studentsAdapter.filter.filter("")
+                    filterEditText.text.clear()
+                }
+            }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+            }
+        }
+
+
+        //Filter
         filterEditText.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -76,6 +89,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+
 
 
     }

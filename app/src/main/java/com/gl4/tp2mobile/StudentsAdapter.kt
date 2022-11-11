@@ -48,14 +48,12 @@ class StudentsAdapter(private val data: ArrayList<Student>) : RecyclerView.Adapt
         return object : Filter(){
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
+                if(charSearch.isEmpty()) {
                     dataFilterList = data
                 } else {
                     val resultList = ArrayList<Student>()
                     for (student in data) {
-                        if (student.nom.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT))
-                        ) {
+                        if (student.nom.lowercase(Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))) {
                             resultList.add(student)
                         }
                     }
@@ -73,5 +71,6 @@ class StudentsAdapter(private val data: ArrayList<Student>) : RecyclerView.Adapt
 
         }
     }
+
 
 }
