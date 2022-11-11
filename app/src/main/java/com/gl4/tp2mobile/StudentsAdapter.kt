@@ -18,11 +18,9 @@ class StudentsAdapter(private val data: ArrayList<Student>) : RecyclerView.Adapt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val image : ImageView
         val text : TextView
-        val checkBox : CheckBox
         init {
             image = itemView.findViewById(R.id.studentImageView)
             text = itemView.findViewById(R.id.studentTextView)
-            checkBox = itemView.findViewById(R.id.studentCheckBox)
         }
     }
 
@@ -34,7 +32,6 @@ class StudentsAdapter(private val data: ArrayList<Student>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = "${dataFilterList[position].nom} ${dataFilterList[position].prenom}"
-        holder.checkBox.isChecked = dataFilterList[position].present
         if(dataFilterList[position].genre == "F"){
             holder.image.setImageResource(R.drawable.woman)
         }
@@ -57,8 +54,6 @@ class StudentsAdapter(private val data: ArrayList<Student>) : RecyclerView.Adapt
                     val resultList = ArrayList<Student>()
                     for (student in data) {
                         if (student.nom.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT)) ||
-                            student.prenom.lowercase(Locale.ROOT)
                                 .contains(charSearch.lowercase(Locale.ROOT))
                         ) {
                             resultList.add(student)

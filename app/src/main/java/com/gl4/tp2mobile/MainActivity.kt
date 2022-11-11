@@ -25,18 +25,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var matieres = listOf<String>("Cours","TP")
-        var studentsC = arrayListOf<Student>(
-            Student("Achour", "Ines", "F", true),
-            Student("Batata", "Marfousa", "M", false),
-            Student("Rasi", "Youja3", "F", true)
+
+        var studentsCours1 = arrayListOf<Student>(
+            Student("Achour", "Ines", "F"),
+            Student("Unknown", "Unknown", "M"),
+            Student("Test", "Test2", "M")
         )
 
-        var studentsT = arrayListOf<Student>(
-            Student("Batata", "Marfousa", "M", false),
-            Student("Rasi", "Youja3", "F", true)
+        var studentsCours2 = arrayListOf<Student>(
+            Student("Foulen", "Foulen", "M"),
+            Student("Achour", "Achour", "F"),
+            Student("Foulena", "Ben Foulen", "F"),
         )
 
-        var students = studentsC
+        var students = studentsCours1
 
         spinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, matieres)
 
@@ -45,10 +47,10 @@ class MainActivity : AppCompatActivity() {
                 /*var toast = Toast.makeText(applicationContext, matieres[position], Toast.LENGTH_SHORT)
                 toast.show()*/
                 if(position ==0){
-                    recycler.adapter = StudentsAdapter(studentsC) //TODO better sol
+                    recycler.adapter = StudentsAdapter(studentsCours1)
                 }
                 else{
-                    recycler.adapter = StudentsAdapter(studentsT)
+                    recycler.adapter = StudentsAdapter(studentsCours2)
                 }
             }
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
@@ -77,4 +79,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 }
