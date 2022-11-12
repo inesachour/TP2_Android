@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         var matieres = listOf<String>("Cours","TP")
 
         var studentsCours1 = arrayListOf<Student>(
-            Student("Achour", "Ines", "F"),
+            Student("Ines", "Ines", "F"),
             Student("Unknown", "Unknown", "M"),
             Student("Ahmed", "Oussama", "M"),
             Student("Ahmed", "Iheb", "M"),
